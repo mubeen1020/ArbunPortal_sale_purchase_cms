@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data> 
+    <template id="sales_report" inherit_id="sale.report_saleorder_document">
+      <xpath expr="//h2[hasclass('mt-4')]" position="replace">
+        <t t-if="doc.opportunity_id.stage_id.is_won">
+           <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
+                <span t-elif="doc.state in ['draft','sent']">Quotation # </span>
+                <span t-else="">Booking Confirmation # </span>
+                <span t-field="doc.name">SO0000</span>
+        </t>
+        
+        <t t-else="">
+
+           <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
+                <span t-elif="doc.state in ['draft','sent']">Quotation # </span>
+                <span t-else="">Order # </span>
+                <span t-field="doc.name">SO0000</span>
+
+        </t>
+      </xpath>
+
+
+
+      <xpath expr="//div[hasclass('row')]" position="replace">
+          <t t-if="doc.opportunity_id.stage_id.is_won">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                       <div t-if="doc.user_id.name" style="flex-grow: 1; margin-right: 10px;">
+                              <strong>Salesperson:</strong>
+                              <span class="m-0" t-field="doc.user_id" >Mitchell Admin</span>
+                          </div>
+
+                           <div t-if="doc.date_order" style="flex-grow: 1; margin-right: 10px;">
+                              <strong>Order Date:</strong>
+                              <span class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'>2023-12-31</span>
+                          </div>
+
+                          <div t-if="doc.booking_datetime" style="flex-grow: 1; margin-right: 10px;">
+                              <strong>Booking Date Time:</strong>
+                              <span class="m-0" t-field="doc.booking_datetime" t-options='{"widget": "datetime"}'>2023-12-31 10:00:00</span>
+                          </div>
+
+                          <div t-if="doc.mode_of_payment" style="flex-grow: 1; margin-right: 10px;">
+                              <strong>Mode of Payment:</strong>
+                              <span class="m-0" t-field="doc.mode_of_payment">Cash</span>
+                          </div>
+
+                         
+                      </div>
+                  </div>
+              </div>
+          </t>
+      </xpath>
+
+
+    </template>
+    
+
+
+
+      <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+            
+                <field name="booking_datetime" />
+                <field name="mode_of_payment" />
+            </xpath>
+        </field>
+      </record>
+
+
+  </data>
+</odoo>
