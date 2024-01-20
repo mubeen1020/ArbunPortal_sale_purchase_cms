@@ -17,7 +17,10 @@
                
 
 
- <div style="text-align: right; color: black;float:right !important;margin-top: 0 !important; padding-top: 0 !important;">
+
+        <div class="page">
+            <div class="oe_structure"/>  
+             <div style="text-align: right; color: black;float:right !important;margin-top: 0 !important; padding-top: 0 !important;">
                     <t t-if="doc.opportunity_id.stage_id.is_won">
                        <h2 style="color:black">
                 <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
@@ -34,11 +37,6 @@
                 <span t-field="doc.name">SO0000</span>
             </t>
           </div>
-        <div class="page">
-
-        
-
-            <div class="oe_structure"/>  
 
         <h2 class="mt-4" style="text-align: right !important; position: absolute; top: 0; right: 0; margin-right: 20px;">
            
