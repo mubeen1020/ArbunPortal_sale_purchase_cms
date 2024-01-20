@@ -20,7 +20,7 @@
 
         <div class="page">
             <div class="oe_structure"/>  
-             <div style="text-align: right; color: black;float:right !important;margin-top: 0 !important; padding-top: 0 !important;">
+             <div style="text-align: right; color: black;float:right !important">
                     <t t-if="doc.opportunity_id.stage_id.is_won">
                        <h2 style="color:black">
                 <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
@@ -31,16 +31,18 @@
             </t>
             
             <t t-else="">
+            <h2>
                 <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
                 <span t-elif="doc.state in ['draft','sent']">Quotation # </span>
                 <span t-else="">Order # </span>
                 <span t-field="doc.name">SO0000</span>
+            </h2>
             </t>
           </div>
-
-        <h2 class="mt-4" style="text-align: right !important; position: absolute; top: 0; right: 0; margin-right: 20px;">
-           
-            </h2>
+          <br/><br/>
+              <br/><br/>
+                  <br/><br/>
+                      <br/><br/>
 
 
 
@@ -65,7 +67,10 @@
                     <span class="m-0" t-field="doc.user_id">Mitchell Admin</span>
                 </div>
             </div>
-
+  <span style="float: left">
+                <strong>Bill To:</strong><br/>
+                <span t-field="doc.partner_id.name"/>
+            </span>
              
 
             <!-- Is there a discount on at least one line? -->
@@ -76,15 +81,15 @@
             <table class="table table-sm o_main_table table-borderless mt-4">
                 <!-- In case we want to repeat the header, remove "display: table-row-group" -->
                 <thead style="display: table-row-group">
-                    <tr>
-                        <th name="th_description" class="text-start bg-dark text-white p-2">Description</th>
-                        <th name="th_quantity" class="text-end bg-dark text-white p-2">Quantity</th>
-                        <th name="th_priceunit" class="text-end bg-dark text-white p-2">Unit Price</th>
-                        <th name="th_discount" t-if="display_discount" class="text-end bg-dark text-white p-2">
+                    <tr style="background-color:black;">
+                        <th name="th_description" class="text-start " style="color:white;padding:5px">Description</th>
+                        <th name="th_quantity" class="text-end " style="color:white;padding:5px">Quantity</th>
+                        <th name="th_priceunit" class="text-end " style="color:white;padding:5px">Unit Price</th>
+                        <th name="th_discount" t-if="display_discount" class="text-end " style="color:white;padding:5px">
                             <span>Disc.%</span>
                         </th>
-                        <th name="th_taxes" class="text-end bg-dark text-white p-2">Taxes</th>
-                        <th name="th_subtotal" class="text-end bg-dark text-white p-2">
+                        <th name="th_taxes" class="text-end " style="color:white;padding:5px">Taxes</th>
+                        <th name="th_subtotal" class="text-end " style="color:white;padding:5px">
                             <span>Amount</span>
                         </th>
                     </tr>
@@ -201,7 +206,6 @@
         <div class="row">
         
             <div class="col-md-12" style="display: flex; justify-content: flex-end;">
-                <div style="text-align: right;">
 
                     <div t-if="doc.user_id.name" style="margin-bottom: 10px; display: flex;">
                         <strong style="width: 150px; text-align: left;">Salesperson:</strong>
@@ -232,12 +236,8 @@
     </t>
 
 
-                </div>
             </div>
-             <span style="float: left">
-                <strong>Bill To:</strong><br/>
-                <span t-field="doc.partner_id.name"/>
-            </span>
+            
         </div>
 </xpath>
 
