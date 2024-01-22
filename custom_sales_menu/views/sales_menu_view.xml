@@ -13,11 +13,6 @@
             </t>
         </t>
 
-
-               
-
-
-
         <div class="page">
             <div class="oe_structure"/>  
              <div style="text-align: right; color: black;float:right !important">
@@ -200,7 +195,7 @@
 </template>
 
 
-    <template id="sales_report" inherit_id="sale.report_saleorder_document">
+<template id="sales_report" inherit_id="sale.report_saleorder_document">
    
 
 
@@ -230,7 +225,7 @@
 
                     <div t-if="doc.booking_datetime" style="margin-bottom: 10px; display: flex;">
                         <strong style="width: 150px; text-align: left;">Booking Time:</strong>
-                        <span style="flex-grow: 1; text-align: left;" t-esc="doc.booking_datetime.strftime('%H:%M:%S')"></span>
+                        <span style="flex-grow: 1; text-align: left;" t-esc="doc.adjusted_booking_time"></span>
                     </div>
 
                     <div t-if="doc.mode_of_payment" style="margin-bottom: 10px; display: flex;">
@@ -268,6 +263,49 @@
         </field>
       </record>
 
+
+<record id="view_sale_order_calendar" model="ir.ui.view">
+    <field name="name">sale.order.calendar</field>
+    <field name="model">sale.order</field>
+    <field name="arch" type="xml">
+        <calendar string="Sale Orders Calendar" date_start="booking_datetime" color="partner_id">
+            <field name="name"/>
+            <field name="partner_id"/>
+            <field name="state"/> <!-- Add more fields here as necessary -->
+        </calendar>
+    </field>
+</record>
+
+<record id="action_sale_order_calendar" model="ir.actions.act_window">
+    <field name="name">Sale Orders Calendar</field>
+    <field name="res_model">sale.order</field>
+    <field name="view_mode">calendar</field>
+    <field name="view_id" ref="view_sale_order_calendar"/>
+</record>
+
+<menuitem id="menu_sale_order_calendar"
+          name="Calendar"
+          parent="sale.sale_order_menu"
+          action="action_sale_order_calendar"
+           sequence="50"
+          />
+
+  <record id="view_sale_order_calendar_inherit" model="ir.ui.view">
+            <field name="name">sale.order.calendar.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_calendar"/>
+            <field name="arch" type="xml">
+                <calendar position="attributes">
+                    <attribute name="string">Sale Orders Calendar</attribute>
+                    <attribute name="date_start">booking_datetime</attribute>
+                    <attribute name="color">id</attribute>
+                </calendar>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="name"/>
+                    <field name="state"/>
+                </xpath>
+            </field>
+        </record>
 
   </data>
 </odoo>

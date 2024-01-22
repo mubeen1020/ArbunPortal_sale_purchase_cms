@@ -15,7 +15,7 @@ class createpurchaseorder(models.TransientModel):
     new_order_line_ids = fields.One2many('getsale.orderdata', 'new_order_line_id', string="Order Line")
     partner_id = fields.Many2one('res.partner', string='Vendor', required=True)
     date_order = fields.Datetime(string='Order Date', required=True, copy=False, default=fields.Datetime.now)
-    booking_datetime = fields.Datetime(string='Date and Time of Booking')
+    booking_datetime = fields.Datetime('Date and Time of Booking')
     customer_name = fields.Char(string='Customer Name')
     mode_of_payment = fields.Char(string='Mode of Payment') 
    
@@ -57,7 +57,7 @@ class createpurchaseorder(models.TransientModel):
         sale_order_name = so.name
         company_id = self.env.company
 
-        self.booking_datetime = so.date_order
+        self.booking_datetime = so.booking_datetime
         self.customer_name = so.partner_id.name
         self.mode_of_payment = so.mode_of_payment.name if so.mode_of_payment else ''
         
