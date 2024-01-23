@@ -269,9 +269,10 @@
     <field name="model">sale.order</field>
     <field name="arch" type="xml">
         <calendar string="Sale Orders Calendar" date_start="booking_datetime" color="partner_id">
-            <field name="name"/>
+             <field name="vendor_names1"/>
+            <field name="display_name"/>
             <field name="partner_id"/>
-            <field name="state"/> <!-- Add more fields here as necessary -->
+            <field name="state"/> 
         </calendar>
     </field>
 </record>
@@ -290,22 +291,23 @@
            sequence="50"
           />
 
-  <record id="view_sale_order_calendar_inherit" model="ir.ui.view">
-            <field name="name">sale.order.calendar.inherit</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_sale_order_calendar"/>
-            <field name="arch" type="xml">
-                <calendar position="attributes">
-                    <attribute name="string">Sale Orders Calendar</attribute>
-                    <attribute name="date_start">booking_datetime</attribute>
-                    <attribute name="color">id</attribute>
-                </calendar>
-                <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="name"/>
-                    <field name="state"/>
-                </xpath>
-            </field>
-        </record>
+<record id="view_sale_order_calendar_inherit" model="ir.ui.view">
+    <field name="name">sale.order.calendar.inherit</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_sale_order_calendar"/>
+    <field name="arch" type="xml">
+        <calendar position="attributes">
+            <attribute name="string">Sale Orders Calendar</attribute>
+            <attribute name="date_start">booking_datetime</attribute>
+            <attribute name="color">id</attribute>
+        </calendar>
+        <xpath expr="//field[@name='partner_id']" position="after">
+            <field name="display_name"/>
+            <field name="state"/>
+        </xpath>
+    </field>
+</record>
+
 
   </data>
 </odoo>
