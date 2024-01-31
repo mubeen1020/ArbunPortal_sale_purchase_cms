@@ -253,6 +253,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
+            
             <group>
                 <field name="booking_datetime" />
                 </group>
@@ -269,10 +270,11 @@
     <field name="model">sale.order</field>
     <field name="arch" type="xml">
         <calendar string="Sale Orders Calendar" date_start="booking_datetime" color="partner_id">
-             <field name="vendor_names1"/>
             <field name="display_name"/>
             <field name="partner_id"/>
             <field name="state"/> 
+            <!-- <button string="View PO" type="object" name="action_view_purchase_orders" class="oe_highlight"/>
+            <button string="View SO" type="object" name="action_view_sales_orders" class="oe_highlight"/> -->
         </calendar>
     </field>
 </record>
@@ -307,6 +309,9 @@
         </xpath>
     </field>
 </record>
+
+
+
 
 
   </data>

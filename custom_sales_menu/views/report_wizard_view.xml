@@ -1,0 +1,19 @@
+<odoo>
+    <record id="view_custom_accounting_report_wizard_form" model="ir.ui.view">
+        <field name="name">custom.accounting.report.wizard.form</field>
+        <field name="model">custom.accounting.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="vendor_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button string="Print Report" type="object" name="print_report" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

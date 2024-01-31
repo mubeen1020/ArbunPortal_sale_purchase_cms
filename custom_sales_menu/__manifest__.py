@@ -8,12 +8,19 @@
     'category': 'Custom',
     'author': 'Your Name',
     'website': 'https://www.yourcompany.com',
-    'depends': ['sale'],
+    'depends': ['sale','base'],
     'data': [
+        'security/ir.model.access.csv',
+        'views/accounting.xml',
         'views/sales_menu_view.xml',
+        'views/report_wizard_view.xml',
+        'views/templates.xml',
+        'views/new_pdf.xml',
+        
     ],
     'demo': [],
     'installable': True,
     'auto_install': False,
     'application': False,
+    'license': 'LGPL-3',
 }

@@ -12,6 +12,7 @@
                 <header>
                     <button name="%(action_transientmodel_wizard)d" string="Create Purchase Order" type="action"
                             class="btn-primary" invisible="state in ('done', 'cancel')"/> 
+                    
                 </header>
                 
                 

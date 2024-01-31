@@ -24,3 +24,4 @@ class SaleOrder(models.Model):
         orders.po_count = len(purchase_ids)
 
     po_count = fields.Integer(compute='_get_po', string='Purchase Order')
+ 
