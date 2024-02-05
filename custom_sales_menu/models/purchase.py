@@ -5,9 +5,7 @@ class PurchaseOrder(models.Model):
 
     def button_confirm(self):
         res = super(PurchaseOrder, self).button_confirm()
-        print(self.name,"kkkkkkkkkkkkkkkkkkkkkkkkkk")
         related_so = self.env['sale.order'].search([('name', '=', self.origin)])
-        print(related_so,"hhhhhhhhhhhhhhhhhhhhhhhhhhhh")
         if related_so:
             related_so.create_account_button()
 
