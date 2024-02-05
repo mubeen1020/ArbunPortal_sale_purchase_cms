@@ -8,7 +8,7 @@
     'category': 'Custom',
     'author': 'Your Name',
     'website': 'https://www.yourcompany.com',
-    'depends': ['sale','base'],
+    'depends': ['sale','base','purchase'],
     'data': [
         'security/ir.model.access.csv',
         'views/accounting.xml',
