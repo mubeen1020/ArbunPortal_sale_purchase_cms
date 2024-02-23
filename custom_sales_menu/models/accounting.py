@@ -8,7 +8,7 @@ class CustomAccounting(models.Model):
     purchase_order_name = fields.Char('Purchase Order',required=True)
     sale_order_name = fields.Char('Sale Order',required=True)
     vendor_name = fields.Char('Vendor Name',required=True)
-    vendor_ids = fields.Many2many('res.partner', string='Vendors')
+    vendor_id = fields.Many2one('res.partner', string='Vendor')
     customer_due = fields.Float(string='Urban Due')
     vendor_due = fields.Float(string='Vendor Due')
     status = fields.Char(string='Status')

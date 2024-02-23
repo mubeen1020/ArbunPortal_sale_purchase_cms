@@ -13,7 +13,7 @@
                     <field name="sale_order_name"/>
                 </group>
                 <group>
-                    <field name="vendor_ids" widget="many2many_tags"/>
+                    <field name="vendor_name" />
                 </group>
                 
                 <group>
@@ -47,7 +47,7 @@
                  </header>
                     <field name="purchase_order_name"/>
                     <field name="sale_order_name"/>
-                    <field name="vendor_ids" widget="many2many_tags"/>
+                    <field name="vendor_name" />
                     <field name="quotation_date"/>
                     <field name="customer_due"/>
                     <field name="vendor_due"/>

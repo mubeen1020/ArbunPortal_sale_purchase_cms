@@ -15,44 +15,28 @@ class SaleOrderInherit(models.Model):
 
     def create_account_button(self):
         for record in self:
-            related_pos = self.env['purchase.order'].search([('origin', '=', record.name)])
-            purchaseordername = set()
-            vendorname = set()
-            vendorid= set()
-            purchaseorderamount = 0.0
+            related_pos = self.env['purchase.order'].search([('origin', '=', record.name), ('state', '=', 'purchase')])
+            total_purchase_order_amount = 0.0
 
             for po in related_pos:
-                purchaseordername.add(po.name)
-                vendorname.add(po.partner_id.name)
-                vendorid.add(po.partner_id.id)
-                purchaseorderamount += po.amount_total
+                vendor_name = po.partner_id.name
+                purchase_order_name = po.name
+                total_purchase_order_amount += po.amount_total
+            
+                balance = record.amount_total - total_purchase_order_amount
+                customer_due = balance if self.mode_of_payment.name == 'Cash' else 0.00
+                vendor_due = balance if self.mode_of_payment.name != 'Cash' else 0.00
 
-            balance = record.amount_total - purchaseorderamount
-
-            customer_due = 0.00
-            vendor_due = 0.00
-            vendor_ids_list = list(vendorid)
-
-            many2many_command = [(6, 0, vendor_ids_list)]
-
-            if self.mode_of_payment.name == 'Cash':
-                vendor_due = balance  
-            else:
-                customer_due = balance  
-
-            account_vals = {
-                'vendor_name' : ", ".join(vendorname),
-                'quotation_date': record.date_order,
-                'sale_order_name': record.name,
-                'purchase_order_name': ", ".join(purchaseordername),
-                'customer_due': customer_due,
-                'vendor_due': vendor_due,
-                'status': self.mode_of_payment.name,
-                'vendor_ids':  many2many_command
-            }
-
-            self.env['custom.accounting'].create(account_vals)
-
+                account_vals = {
+                    'vendor_name': vendor_name,
+                    'quotation_date': record.date_order,
+                    'sale_order_name': record.name,
+                    'purchase_order_name': purchase_order_name, 
+                    'customer_due': customer_due,
+                    'vendor_due': vendor_due,
+                    'status': self.mode_of_payment.name,
+                }
+                self.env['custom.accounting'].create(account_vals)
 
     @api.depends('booking_datetime')
     def _compute_adjusted_booking_time(self):

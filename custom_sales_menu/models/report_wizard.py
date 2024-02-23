@@ -40,7 +40,7 @@ class Reportballance(models.AbstractModel):
                 ('quotation_date', '<=', end_date)
             ]
         if vendor_id:
-            domain += [('vendor_ids', 'in', [vendor_id])]
+            domain += [('vendor_id', 'in', [vendor_id])]
 
         records = self.env['custom.accounting'].search(domain)
         print(records)
