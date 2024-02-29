@@ -292,6 +292,7 @@
           action="action_sale_order_calendar"
            sequence="50"
           />
+          
 
 <record id="view_sale_order_calendar_inherit" model="ir.ui.view">
     <field name="name">sale.order.calendar.inherit</field>

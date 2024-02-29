@@ -44,7 +44,6 @@ class Reportballance(models.AbstractModel):
 
         records = self.env['custom.accounting'].search(domain)
         print(records)
-        print("aaaaaaaaaaaaaa")
 
         total_customer_due = sum(record.customer_due for record in records)
         total_vendor_due = sum(record.vendor_due for record in records)

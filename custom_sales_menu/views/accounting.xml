@@ -41,10 +41,6 @@
             <field name="model">custom.accounting</field>
             <field name="arch" type="xml">
                 <tree>
-                 <header>
-                <button string="Generate Report" type="object" 
-                        name="action_open_report_wizard" class="oe_highlight"/>
-                 </header>
                     <field name="purchase_order_name"/>
                     <field name="sale_order_name"/>
                     <field name="vendor_name" />
@@ -63,9 +59,11 @@
     <field name="view_id" ref="view_custom_accounting_tree"/>
    </record>
 
-  <menuitem id="menu_custom_accounting" name="Vendor Statement" action="action_custom_accounting" sequence="450"/>
+  <menuitem id="menu_custom_accounting12" name="Vendor Statement" action="action_custom_accounting" sequence="450"/>
     <menuitem id="menu_custom_account_info" name="Vendor Statement" action="action_custom_accounting" parent="sale.sale_order_menu" sequence="90"/>
 
+
+ 
 
   <!-- <record id="sale_order_view" model="ir.ui.view">
             <field name="name">sale.order.form</field>
@@ -79,11 +77,6 @@
             </field>
     </record> -->
 
-    
  
-
-
-
-
     </data>
 </odoo>
