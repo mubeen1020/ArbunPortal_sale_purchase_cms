@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+<record id="view_custom_accounting_form" model="ir.ui.view">
+        <field name="name">custom.accounting.form</field>
+        <field name="model">custom.accounting</field>
+        <field name="arch" type="xml">
+       
+            <form>
+                <group>
+                    <field name="purchase_order_name"/>
+                
+                    <field name="sale_order_name"/>
+               
+                    <field name="vendor_name" />
+                
+                    <field name="quotation_date"/>
+                
+                    <field name="customer_due"/>
+               
+                    <field name="vendor_due"/>
+                
+                    <field name="status"/>
+                </group> 
+              
+            </form>
+        </field>
+    </record>
+
+        <record id="view_custom_accounting_tree" model="ir.ui.view">
+            <field name="name">custom.accounting.tree</field>
+            <field name="model">custom.accounting</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="purchase_order_name"/>
+                    <field name="sale_order_name"/>
+                    <field name="vendor_name" />
+                    <field name="quotation_date"/>
+                    <field name="customer_due"/>
+                    <field name="vendor_due"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="action_custom_accounting" model="ir.actions.act_window">
+    <field name="name">Vendor Statement</field>
+    <field name="res_model">custom.accounting</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_custom_accounting_tree"/>
+   </record>
+
+  <menuitem id="menu_custom_accounting12" name="Vendor Statement" action="action_custom_accounting" sequence="450"/>
+    <menuitem id="menu_custom_account_info" name="Vendor Statement" action="action_custom_accounting" parent="sale.sale_order_menu" sequence="90"/>
+
+
+ 
+<!-- 
+  <record id="sale_order_view" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <header>
+                     <button name="create_account_button" string="Create Vendor Statement" type="object"
+                            class="btn-primary" invisible="state in ('done', 'cancel')"/> 
+                </header>
+            </field>
+    </record> -->
+
+ 
+    </data>
+</odoo>

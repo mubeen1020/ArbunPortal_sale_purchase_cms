@@ -1,0 +1,62 @@
+<odoo>
+  <data>
+    <template id="custom_accounting_report_template2">
+      <t t-call="web.html_container">
+        <div>  
+         <img t-att-src="'data:image/png;base64,%s' % company" style="height: 50px;"/>
+         </div>
+         <br/>
+         <div style="border-bottom: 2px solid black !important; padding-bottom: 10px !important;">
+          <h3 class="text-center" style="margin: 0;text-align:center">Vendor Statement  <span style="float:right;" t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"/></h3>
+         </div>
+
+
+
+
+          <div style="padding: 20px;">
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
+              <thead>
+                <tr>
+                  <th style="border: 1px solid black;">Purchase Order</th>
+                  <th style="border: 1px solid black;">Sale Order</th>
+                  <th style="border: 1px solid black;">Vendor Name</th>
+                  <th style="border: 1px solid black;">Quotation Date</th>
+                  <th style="border: 1px solid black;">Urban Due</th>
+                  <th style="border: 1px solid black;">Vendor Due</th>
+                  <th style="border: 1px solid black;">Status</th>
+                </tr>
+              </thead>
+        <t t-foreach="docs" t-as="doc">
+        
+              <tbody>
+                
+                  <tr>
+                    <td style="border: 1px solid black;text-align:center"><span t-esc="doc.purchase_order_name"/></td>
+                    <td style="border: 1px solid black;text-align:center"><span t-esc="doc.sale_order_name"/></td>
+                    <td style="border: 1px solid black;text-align:center"><span t-esc="doc.vendor_name"/></td>
+                    <td style="border: 1px solid black;text-align:center"><span t-esc="doc.quotation_date"/></td>
+                    <td style="border: 1px solid black;text-align:center"><span t-esc="doc.customer_due"/></td>
+                    <td style="border: 1px solid black;text-align:center"><span t-esc="doc.vendor_due"/></td>
+                    <td style="border: 1px solid black;text-align:center"><span t-esc="doc.status"/></td>
+                  </tr>
+              </tbody>
+        
+            
+        </t>
+              <tfoot>
+                <tr>
+                  <td colspan="4" style="text-align: right; border: 1px solid black;"><strong>Total Urban Due:</strong></td>
+                  <td colspan="3" style="border: 1px solid black;text-align:center"><span t-esc="total_customer_due"/></td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="text-align: right; border: 1px solid black;"><strong>Total Vendor Due:</strong></td>
+                  <td colspan="3" style="border: 1px solid black;text-align:center"><span t-esc="total_vendor_due"/></td>
+                </tr>
+              </tfoot>
+          </table>
+          </div>
+      </t>
+    
+    </template>
+  </data>
+</odoo>
